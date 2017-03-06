@@ -73,6 +73,20 @@ public class CommentsInfo : MonoBehaviour
 		}
 	}
 
+	private void setArrows (int voted, Button upVote, Button downVote)
+	{
+		if (voted == 1) {
+			setArrow (upVote, false, "up");
+			setArrow (downVote, true, "down");
+		} else if (voted == -1) {
+			setArrow (upVote, true, "up");
+			setArrow (downVote, false, "down");
+		} else if (voted == 0) {
+			setArrow (upVote, true, "up");
+			setArrow (downVote, true, "down");
+		}
+	}
+
 	private void upVoteUI (int id, int state)
 	{
 		if (state == -1) {
@@ -95,20 +109,6 @@ public class CommentsInfo : MonoBehaviour
 	private void changeKarma (Text karmaObject, int num)
 	{
 		karmaObject.text = (Int32.Parse (karmaObject.text) + num).ToString ();
-	}
-
-	private void setArrows (int voted, Button upVote, Button downVote)
-	{
-		if (voted == 1) {
-			setArrow (upVote, false, "up");
-			setArrow (downVote, true, "down");
-		} else if (voted == -1) {
-			setArrow (upVote, true, "up");
-			setArrow (downVote, false, "down");
-		} else if (voted == 0) {
-			setArrow (upVote, true, "up");
-			setArrow (downVote, true, "down");
-		}
 	}
 
 	private void loadComments (string data)
@@ -164,7 +164,6 @@ public class CommentsInfo : MonoBehaviour
 		commentPanel.SetActive (true);
 		postCommentText = GameObject.Find ("PostCommentTextUI").GetComponent<Text> ();
 		postCommentButton = GameObject.Find ("ButtonPostCommentUI").GetComponent<Button> ();
-
 		postCommentButton.onClick.AddListener (() => {
 			sendComment ();
 		});
@@ -173,6 +172,8 @@ public class CommentsInfo : MonoBehaviour
 	private void sendComment ()
 	{
 		apiRestDAO.PostComment (1, postCommentText.text, marker);
+		commentPanel.SetActive (false);
+		getCommentUI (marker);
 	}
 
 	private void getCommentUI (string markerComment)

@@ -1,13 +1,19 @@
 sceneSetups:
-- path: Assets/CareerM.unity
+- path: Assets/Intro.unity
   isLoaded: 0
   isActive: 0
+- path: Assets/Login.unity
+  isLoaded: 1
+  isActive: 1
 - path: Assets/Menu.unity
   isLoaded: 0
   isActive: 0
+- path: Assets/CareerM.unity
+  isLoaded: 0
+  isActive: 0
 - path: Assets/CommentsM.unity
-  isLoaded: 1
-  isActive: 1
-- path: Assets/Intro.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Loading.unity
   isLoaded: 0
   isActive: 0

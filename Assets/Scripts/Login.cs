@@ -8,10 +8,14 @@ using System.Text.RegularExpressions;
 
 public class Login : MonoBehaviour
 {
+	PlayerPrefsDAO playerPrefsDAO;
 
 	void Start ()
 	{
-		
+		playerPrefsDAO = new PlayerPrefsDAO ();
+		if (playerPrefsDAO.checkAccount ()) {
+			nextScene ();
+		}
 	}
 		
 	void Update ()
@@ -72,17 +76,19 @@ public class Login : MonoBehaviour
 	{
 		InputField nameField = GameObject.Find ("NameFieldUI").GetComponent<InputField> ();
 		InputField emailField = GameObject.Find ("EmailFieldUI").GetComponent<InputField> ();
-		PlayerPrefsDAO playerPrefsDAO = new PlayerPrefsDAO ();
-
+		playerPrefsDAO = new PlayerPrefsDAO ();
 		if (validateName (nameField.text) && validateEmail (emailField.text)) {
-			Debug.Log ("ASD");
 			playerPrefsDAO.setName (nameField.text);
 			playerPrefsDAO.setEmail (emailField.text);
-			SceneLoader sceneLoader = new SceneLoader ();
-			sceneLoader.LoadNewSceneGO ();
+			nextScene ();
 		} else {
 			validateNameFieldUI (nameField.text);
 			validateEmailFieldUI (emailField.text);
 		}
+	}
+
+	private void nextScene(){
+		SceneLoader sceneLoader = new SceneLoader ();
+		sceneLoader.LoadNewSceneGO ();
 	}
 }

@@ -55,4 +55,12 @@ public class PlayerPrefsDAO : MonoBehaviour {
 		}
 		return "";
 	}
+
+	public bool checkAccount(){
+		if (exist ("name")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
