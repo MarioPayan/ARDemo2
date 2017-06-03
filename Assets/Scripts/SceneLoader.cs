@@ -7,13 +7,13 @@ public class SceneLoader : MonoBehaviour {
 	[SerializeField]
 	private int time;
 	[SerializeField]
-	private int nextScene;
+	private string nextScene;
 	private int scene;
 	private bool loadScene = false;
 	private Text loadingText;
 
 	public void Start(){
-		nextScene = 0;
+
 	}
 	// Updates once per frame
 	public void Update() {
@@ -48,10 +48,8 @@ public class SceneLoader : MonoBehaviour {
 		// This line waits for 3 seconds before executing the next line in the coroutine.
 		// This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
 		yield return new WaitForSeconds(time);
-
 		// Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
-		scene = SceneManager.GetActiveScene().buildIndex + 1;
-		AsyncOperation async = Application.LoadLevelAsync(scene);
+		AsyncOperation async = Application.LoadLevelAsync(nextScene);
 
 		// While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
 		while (!async.isDone) {
@@ -59,9 +57,11 @@ public class SceneLoader : MonoBehaviour {
 		}
 	}
 
-	public void LoadNewSceneGO(){
-		scene = SceneManager.GetActiveScene().buildIndex + 1 + nextScene;
-		SceneManager.LoadScene (scene);
+	public void LoadNewSceneGO(string nextSceneArg = ""){
+		if (nextSceneArg != "") {
+			nextScene = nextSceneArg;
+		}
+		SceneManager.LoadSceneAsync (nextScene);
 	}
 
 }

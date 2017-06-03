@@ -9,15 +9,29 @@ using System.Text.RegularExpressions;
 public class Login : MonoBehaviour
 {
 	PlayerPrefsDAO playerPrefsDAO;
+	ApiRestDAO apiRestDAO;
+	Button okButton;
+	User user;
+	InputField nameField;
+	InputField emailField;
+	Text statusMessage;
 
-	void Start ()
+	void Start(){
+		okButton = GameObject.Find ("OkButtonUI").GetComponent<Button> ();
+		okButton.onClick.AddListener (() => {
+			saveDataAndContinue();
+		}
+		);
+	}
+
+	void Awake ()
 	{
 		playerPrefsDAO = new PlayerPrefsDAO ();
 		if (playerPrefsDAO.checkAccount ()) {
 			nextScene ();
 		}
 	}
-		
+
 	void Update ()
 	{
 		
@@ -44,6 +58,8 @@ public class Login : MonoBehaviour
 
 	public void validateNameFieldUI (string name)
 	{
+		statusMessage = GameObject.Find ("StatusMessage").GetComponent<Text> ();
+		statusMessage.text = "";
 		bool validName = validateName (name);
 		ColorBlock cb = GameObject.Find ("NameFieldUI").GetComponent<InputField> ().colors;
 		Color errorColor = Color.red;
@@ -74,21 +90,38 @@ public class Login : MonoBehaviour
 
 	public void saveDataAndContinue ()
 	{
-		InputField nameField = GameObject.Find ("NameFieldUI").GetComponent<InputField> ();
-		InputField emailField = GameObject.Find ("EmailFieldUI").GetComponent<InputField> ();
-		playerPrefsDAO = new PlayerPrefsDAO ();
+		nameField = GameObject.Find ("NameFieldUI").GetComponent<InputField> ();
+		emailField = GameObject.Find ("EmailFieldUI").GetComponent<InputField> ();
 		if (validateName (nameField.text) && validateEmail (emailField.text)) {
-			playerPrefsDAO.setName (nameField.text);
-			playerPrefsDAO.setEmail (emailField.text);
-			nextScene ();
+			apiRestDAO = gameObject.AddComponent (typeof(ApiRestDAO)) as ApiRestDAO;
+			apiRestDAO.checkUserAvailable (nameField.text);
 		} else {
 			validateNameFieldUI (nameField.text);
 			validateEmailFieldUI (emailField.text);
 		}
 	}
 
-	private void nextScene(){
+	public void checkUser(string data){
+		user = JsonUtility.FromJson<User> (data);
+		if (user.id == 0) {
+			playerPrefsDAO = new PlayerPrefsDAO ();
+			playerPrefsDAO.setName (nameField.text);
+			playerPrefsDAO.setEmail (emailField.text);
+			apiRestDAO.PostUser (
+				playerPrefsDAO.getName (),
+				playerPrefsDAO.getPassword (),
+				playerPrefsDAO.getEmail ()
+			);
+			nextScene ();
+		} else {
+			statusMessage = GameObject.Find ("StatusMessage").GetComponent<Text> ();
+			statusMessage.text = "El nombre de usuario ya está en uso";
+		}
+	}
+
+	private void nextScene ()
+	{
 		SceneLoader sceneLoader = new SceneLoader ();
-		sceneLoader.LoadNewSceneGO ();
+		sceneLoader.LoadNewSceneGO ("Menu");
 	}
 }

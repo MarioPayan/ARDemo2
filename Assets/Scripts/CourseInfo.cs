@@ -11,6 +11,8 @@ public class CourseInfo : MonoBehaviour
 	private Text cursoTitulo;
 	private Text cursoCreditos;
 	private Text cursoDescripcion;
+	private string cursoEnlace;
+	private Button cursoMasInfo;
 	private InputField cursoNota;
 	private Toggle cursoAprobado;
 	private CoursesDAO db;
@@ -24,6 +26,9 @@ public class CourseInfo : MonoBehaviour
 		cursoTitulo = GameObject.Find ("CourseTitleUI").GetComponent<Text> ();
 		cursoCreditos = GameObject.Find ("CourseCreditsUI").GetComponent<Text> ();
 		cursoDescripcion = GameObject.Find ("CourseDescriptionUI").GetComponent<Text> ();
+		cursoEnlace = "null";
+		cursoMasInfo = GameObject.Find ("CourseLinkUI").GetComponent<Button> ();
+
 		cursoInfo.SetActive (false);
 	}
 
@@ -31,18 +36,23 @@ public class CourseInfo : MonoBehaviour
 		cursoInfo = GameObject.Find ("CourseInfoCanvas");
 	}
 
-	private void changeInfo(string courseCode){
-		this.courseCode = courseCode;
-		cursoCodigo.text = courseCode;
+	private void changeInfo(string courseID){
+		this.courseCode = db.getCode (courseID);
+		cursoCodigo.text = "Código: " + courseCode;
 		cursoTitulo.text = db.getTitle (courseCode);
-		cursoCreditos.text = db.getCredits (courseCode).ToString ();
+		cursoCreditos.text = "Créditos: " + db.getCredits (courseCode).ToString ();
 		cursoDescripcion.text = db.getDescription (courseCode);
+		cursoEnlace = db.getLink (courseCode);
+		//print (cursoEnlace);
 		if (db.getCoursed (courseCode)) {
 			cursoAprobado.isOn = true;
 		} else {
 			cursoAprobado.isOn = false;
 		}
 		cursoNota.text = db.getNote (courseCode).ToString ();
+		cursoMasInfo.onClick.AddListener (() => {
+			moreInfo ();
+		});
 	}
 
 	void Update ()
@@ -82,5 +92,15 @@ public class CourseInfo : MonoBehaviour
 		if (validateNote (cursoNota.text)) {
 			db.saveModifiedCourse (courseCode, cursoAprobado.isOn, float.Parse (cursoNota.text));
 		}
+	}
+
+	public void moreInfo(){
+		if(cursoEnlace != "null" ){
+			print (cursoEnlace);
+			Application.OpenURL (cursoEnlace);
+		} else{
+			//Somting
+		}
+
 	}
 }

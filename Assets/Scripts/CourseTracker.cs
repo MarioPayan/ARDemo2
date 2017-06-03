@@ -47,6 +47,4 @@ public class CourseTracker : MonoBehaviour, ITrackableEventHandler {
 
 		}
 	}
-
-
 }

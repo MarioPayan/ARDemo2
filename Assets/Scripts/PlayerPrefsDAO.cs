@@ -63,4 +63,8 @@ public class PlayerPrefsDAO : MonoBehaviour {
 			return false;
 		}
 	}
+
+	public string getPassword(){
+		return "pziry38tnc93n68n";
+	}
 }

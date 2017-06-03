@@ -1,20 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Login.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CommentsVuMarkTracker.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerPrefsDAO.cs" Line="59" Column="13" />
+      <File FileName="Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PpalCourseInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PpalCourseTracker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CoursesDB.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CoursesDAO.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Comment.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CourseInfo.cs" Line="1" Column="1" />
+      <File FileName="Assets\Vuforia\Scripts\VuMarkBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\CourseTracker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CommentsInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CommentTracker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ApiRestDAO.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CommentList.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Login.cs" Line="79" Column="42" />
+      <File FileName="Assets\Scripts\CoursesVuMarkTracker.cs" Line="9" Column="2" />
+      <File FileName="Assets\Scripts\CommentsVuMarkTracker.cs" Line="15" Column="32" />
+      <File FileName="Assets\Scripts\CommentTracker.cs" Line="11" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

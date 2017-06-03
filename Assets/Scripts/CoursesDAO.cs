@@ -10,6 +10,13 @@ public class CoursesDAO : MonoBehaviour {
 		
 	}
 
+	public string getCode (string id)
+	{
+		string query = "SELECT code FROM course WHERE id='"+id+"';";
+		DataTable result = sqlDB.ExecuteQuery(query);
+		return (string) result.Rows[0]["code"];
+	}
+
 	public string getTitle (string course)
 	{
 		string query = "SELECT title FROM course WHERE code='"+course+"';";
@@ -31,6 +38,12 @@ public class CoursesDAO : MonoBehaviour {
 		return (string) result.Rows[0]["description"];
 	}
 
+	public string getLink(string course){
+		string query = "SELECT link FROM course WHERE code='"+course+"';";
+		DataTable result = sqlDB.ExecuteQuery(query);
+		return (string) result.Rows[0]["link"];
+	}
+
 	public bool getCoursed (string course)
 	{
 		string query = "SELECT coursed FROM course WHERE code='"+course+"';";
@@ -43,21 +56,6 @@ public class CoursesDAO : MonoBehaviour {
 		string query = "SELECT note FROM course WHERE code='"+course+"';";
 		DataTable result = sqlDB.ExecuteQuery(query);
 		return float.Parse(result.Rows [0] ["note"] + " ");
-	}
-
-	public void setTitle (string course, string title)
-	{
-
-	}
-
-	public void setCredits (string course, int credits)
-	{
-
-	}
-
-	public void setDescription (string course, string description)
-	{
-
 	}
 
 	public void setCoursed (string course, bool coursed)
@@ -89,9 +87,16 @@ public class CoursesDAO : MonoBehaviour {
 
 	public int getApprovedCredits ()
 	{
-		string query = "SELECT SUM(credits) AS approved_credits FROM (SELECT credits FROM Course WHERE coursed = 1)";
+		string query = "SELECT SUM(credits) AS approved_credits FROM (SELECT credits FROM Course WHERE coursed = 1 AND note>=3)";
 		DataTable result = sqlDB.ExecuteQuery(query);
 		return (int) result.Rows[0]["approved_credits"];
+	}
+
+	public int getCoursedCredits ()
+	{
+		string query = "SELECT SUM(credits) AS coursed_credits FROM (SELECT credits FROM Course WHERE coursed = 1)";
+		DataTable result = sqlDB.ExecuteQuery(query);
+		return (int) result.Rows[0]["coursed_credits"];
 	}
 
 	public int getTotalCredits ()
@@ -99,5 +104,26 @@ public class CoursesDAO : MonoBehaviour {
 		string query = "SELECT SUM(credits) AS total_credits FROM Course";
 		DataTable result = sqlDB.ExecuteQuery(query);
 		return (int) result.Rows[0]["total_credits"];
+	}
+
+	public int getApprovedCourses ()
+	{
+		string query = "SELECT COUNT(*) AS approved_courses FROM (SELECT credits FROM Course WHERE coursed = 1 AND note>=3)";
+		DataTable result = sqlDB.ExecuteQuery(query);
+		return (int) result.Rows[0]["approved_courses"];
+	}
+
+	public int getCoursedCourses ()
+	{
+		string query = "SELECT COUNT(*) AS coursed_courses FROM (SELECT credits FROM Course WHERE coursed = 1)";
+		DataTable result = sqlDB.ExecuteQuery(query);
+		return (int) result.Rows[0]["coursed_courses"];
+	}
+
+	public int getTotalCourses ()
+	{
+		string query = "SELECT COUNT(*) AS total_courses FROM Course";
+		DataTable result = sqlDB.ExecuteQuery(query);
+		return (int) result.Rows[0]["total_courses"];
 	}
 }
