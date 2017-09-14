@@ -23,6 +23,7 @@ public class PpalCourseInfo : MonoBehaviour
 	private Text remainCourses;
 	private Text percentCompletedCourses;
 	private CoursesDAO db;
+	private QuizesDAO db2;
 	private PlayerPrefsDAO playerPrefsDAO;
 
 	void Start ()
@@ -43,6 +44,7 @@ public class PpalCourseInfo : MonoBehaviour
 		remainCourses = GameObject.Find ("RemainCoursesUI").GetComponent<Text> ();
 		percentCompletedCourses = GameObject.Find ("PercentCompletedCoursesUI").GetComponent<Text> ();
 		db = new CoursesDAO ();
+		db2 = new QuizesDAO ();
 		playerPrefsDAO = new PlayerPrefsDAO ();
 		update ();
 	}
@@ -51,8 +53,12 @@ public class PpalCourseInfo : MonoBehaviour
 	{
 		name.text = playerPrefsDAO.getName ();
 		email.text = playerPrefsDAO.getEmail ();
-		karma.text = "Karma: No impplemented yet";
-		rank.text = "No implemented yet";
+		//karma.text = "Karma: No impplemented yet";
+		//rank.text = "No implemented yet";
+		int karmaInt = db2.getResolvedCount();
+		karma.text = "Karma: " + karmaInt.ToString();
+		assignCategory (karmaInt);
+		//rank.text = "Primiparo";
 		totalCredits.text = "Total de créditos: " + db.getTotalCredits ().ToString ();
 		coursedCredits.text = "Créditos cursados: " + db.getCoursedCredits ().ToString();
 		approvedCredits.text = "Creditos aprobados: " + db.getApprovedCredits ().ToString ();
@@ -70,6 +76,22 @@ public class PpalCourseInfo : MonoBehaviour
 	void Awake ()
 	{
 		ppalCursoInfo = GameObject.Find ("CoursesPpalCanvas");
+	}
+
+	void assignCategory(int karma){
+		string category = "";
+		if (karma < 10)
+			category = "primiparo";
+		else if (karma >= 10 && karma < 20)
+			category = "Estudiante curioso";
+		else if (karma >= 20 && karma < 30)
+			category = "Estudiante experimentado";
+		else if (karma >= 30 && karma < 50)
+			category = "Estudiante conocedor";
+		else if (karma >= 50)
+			category = "Univalluno";
+		rank.text = category;
+		
 	}
 	
 	// Update is called once per frame

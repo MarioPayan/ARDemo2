@@ -17,6 +17,15 @@ sceneSetups:
 - path: Assets/CommentsM.unity
   isLoaded: 0
   isActive: 0
+- path: Assets/InformativeM.unity
+  isLoaded: 1
+  isActive: 1
+- path: Assets/QuizM.unity
+  isLoaded: 0
+  isActive: 0
 - path: Assets/Loading.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/HelpM.unity
   isLoaded: 0
   isActive: 0

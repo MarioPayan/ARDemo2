@@ -28,7 +28,6 @@ public class CourseInfo : MonoBehaviour
 		cursoDescripcion = GameObject.Find ("CourseDescriptionUI").GetComponent<Text> ();
 		cursoEnlace = "null";
 		cursoMasInfo = GameObject.Find ("CourseLinkUI").GetComponent<Button> ();
-
 		cursoInfo.SetActive (false);
 	}
 
@@ -43,7 +42,6 @@ public class CourseInfo : MonoBehaviour
 		cursoCreditos.text = "Créditos: " + db.getCredits (courseCode).ToString ();
 		cursoDescripcion.text = db.getDescription (courseCode);
 		cursoEnlace = db.getLink (courseCode);
-		//print (cursoEnlace);
 		if (db.getCoursed (courseCode)) {
 			cursoAprobado.isOn = true;
 		} else {
@@ -61,7 +59,7 @@ public class CourseInfo : MonoBehaviour
 			cursoNota.gameObject.SetActive (true);
 		} else {
 			cursoNota.gameObject.SetActive (false);
-		}
+		}		
 	}
 
 	private bool validateNote (string note)
@@ -96,11 +94,9 @@ public class CourseInfo : MonoBehaviour
 
 	public void moreInfo(){
 		if(cursoEnlace != "null" ){
-			print (cursoEnlace);
 			Application.OpenURL (cursoEnlace);
 		} else{
-			//Somting
+			//Someting
 		}
-
 	}
 }

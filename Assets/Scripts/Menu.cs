@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour {
 	void Start () {
 		name = GameObject.Find ("NameUI").GetComponent<Text> ();
 		email = GameObject.Find ("EmailUI").GetComponent<Text> ();
-		playerPrefsDAO = new PlayerPrefsDAO ();
+		playerPrefsDAO = gameObject.AddComponent (typeof(PlayerPrefsDAO)) as PlayerPrefsDAO;
 
 		loadPrefs ();
 	}

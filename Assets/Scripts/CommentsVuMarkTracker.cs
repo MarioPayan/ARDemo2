@@ -36,6 +36,7 @@ public class CommentsVuMarkTracker : MonoBehaviour
 
 	public void OnVuMarkDetected(VuMarkTarget target)
 	{
+		print(GetVuMarkString(target));
 		commentsInfo.SetActive (true);
 		commentsInfo.SendMessage ("getCommentUI", GetVuMarkString(target));
 		previousDetected = true;

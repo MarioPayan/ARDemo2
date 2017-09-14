@@ -26,7 +26,7 @@ public class Login : MonoBehaviour
 
 	void Awake ()
 	{
-		playerPrefsDAO = new PlayerPrefsDAO ();
+		playerPrefsDAO = gameObject.AddComponent (typeof(PlayerPrefsDAO)) as PlayerPrefsDAO;
 		if (playerPrefsDAO.checkAccount ()) {
 			nextScene ();
 		}

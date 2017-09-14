@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CoursesDAO : MonoBehaviour {
 
@@ -82,48 +83,76 @@ public class CoursesDAO : MonoBehaviour {
 	{
 		string query = "SELECT SUM(note*credits)/SUM(credits) AS average FROM (SELECT note,credits FROM Course WHERE coursed = 1)";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return float.Parse(result.Rows [0] ["average"] + " ");
+		try{
+			return float.Parse(result.Rows [0] ["average"] + " ");
+		}catch(Exception){
+			return 0;
+		}
 	}
 
 	public int getApprovedCredits ()
 	{
 		string query = "SELECT SUM(credits) AS approved_credits FROM (SELECT credits FROM Course WHERE coursed = 1 AND note>=3)";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return (int) result.Rows[0]["approved_credits"];
+		try{
+			return (int) result.Rows[0]["approved_credits"];
+		}catch(Exception){
+			return 0;
+		}
 	}
 
 	public int getCoursedCredits ()
 	{
 		string query = "SELECT SUM(credits) AS coursed_credits FROM (SELECT credits FROM Course WHERE coursed = 1)";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return (int) result.Rows[0]["coursed_credits"];
+		try{
+			return (int) result.Rows[0]["coursed_credits"];
+		}catch(Exception){
+			return 0;
+		}
 	}
 
 	public int getTotalCredits ()
 	{
 		string query = "SELECT SUM(credits) AS total_credits FROM Course";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return (int) result.Rows[0]["total_credits"];
+		try{
+			return (int) result.Rows[0]["total_credits"];
+		}catch(Exception e){
+			return 0;
+		}
 	}
 
 	public int getApprovedCourses ()
 	{
 		string query = "SELECT COUNT(*) AS approved_courses FROM (SELECT credits FROM Course WHERE coursed = 1 AND note>=3)";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return (int) result.Rows[0]["approved_courses"];
+		try{
+			return (int) result.Rows[0]["approved_courses"];
+		}catch(Exception){
+			return 0;
+		}
 	}
 
 	public int getCoursedCourses ()
 	{
 		string query = "SELECT COUNT(*) AS coursed_courses FROM (SELECT credits FROM Course WHERE coursed = 1)";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return (int) result.Rows[0]["coursed_courses"];
+		try{
+			return (int) result.Rows[0]["coursed_courses"];
+		}catch(Exception){
+			return 0;
+		}
 	}
 
 	public int getTotalCourses ()
 	{
 		string query = "SELECT COUNT(*) AS total_courses FROM Course";
 		DataTable result = sqlDB.ExecuteQuery(query);
-		return (int) result.Rows[0]["total_courses"];
+		try{
+			return (int) result.Rows[0]["total_courses"];
+		}catch(Exception){
+			return 0;
+		}
 	}
 }

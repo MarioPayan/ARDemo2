@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="buddy-graduate-clip-art-9144" size="420.000000 426.014313" />
+    <ImageTarget name="gallo-de-imagenes-predisenadas_19-131187" size="320.000000 320.000000" />
+    <ImageTarget name="cards" size="626.000000 626.000000" />
+    <ImageTarget name="s-starxx_5312" size="660.000000 660.000000" />
+    <ImageTarget name="test" size="416.000000 416.000000" />
+  </Tracking>
+</QCARConfig>

@@ -21,12 +21,4 @@ public class Comment {
 		date   = "";
 		voted  = 0;
 	}
-
-	public void print(){
-		if (id != null)	Debug.Log (id);
-		if (owner != null)	Debug.Log (owner);
-		if (body != null)	Debug.Log (body);
-		if (marker != null)	Debug.Log (marker);
-
-	}
 }

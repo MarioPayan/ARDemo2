@@ -35,9 +35,13 @@ public class CoursesVuMarkTracker : MonoBehaviour
 
 	public void OnVuMarkDetected(VuMarkTarget target)
 	{
-		cursoInfo.SetActive (true);
-		cursoInfo.SendMessage ("changeInfo", GetVuMarkString(target));
-		previousDetected = true;
+		string strTarget = GetVuMarkString (target);
+		int intTarget = Int32.Parse(strTarget);
+		if (intTarget >= 1 && intTarget <= 53) {
+			cursoInfo.SetActive (true);
+			cursoInfo.SendMessage ("changeInfo", strTarget);
+			previousDetected = true;
+		}
 	}
 
 	public void OnVuMarkLost(VuMarkTarget target)

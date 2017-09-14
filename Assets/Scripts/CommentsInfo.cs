@@ -34,10 +34,11 @@ public class CommentsInfo : MonoBehaviour
 		downVoteButtons = new Button[10];
 
 		for (int i = 0; i < commentTexts.Length; i++) {
-			commentTexts [i] = GameObject.Find ("CommentTextUI" + i.ToString ()).GetComponent<Text> ();
-			karmaTexts [i] = GameObject.Find ("KarmaUI" + i.ToString ()).GetComponent<Text> ();
-			upVoteButtons [i] = GameObject.Find ("UpVoteButtonUI" + i.ToString ()).GetComponent<Button> ();
-			downVoteButtons [i] = GameObject.Find ("DownVoteButtonUI" + i.ToString ()).GetComponent<Button> ();
+			int j = i + 1;
+			commentTexts [i] = GameObject.Find ("CommentTextUI" + j.ToString ()).GetComponent<Text> ();
+			karmaTexts [i] = GameObject.Find ("KarmaUI" + j.ToString ()).GetComponent<Text> ();
+			upVoteButtons [i] = GameObject.Find ("UpVoteButtonUI" + j.ToString ()).GetComponent<Button> ();
+			downVoteButtons [i] = GameObject.Find ("DownVoteButtonUI" + j.ToString ()).GetComponent<Button> ();
 		}
 
 		createCommentButton = GameObject.Find ("CreateCommentButton").GetComponent<Button> ();
@@ -46,6 +47,7 @@ public class CommentsInfo : MonoBehaviour
 
 		commentPanel.SetActive (false);
 		commentsInfo.SetActive (false);
+		//getCommentUI ("1");
 	}
 
 	void Awake ()
